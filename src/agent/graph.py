@@ -12,10 +12,12 @@ from langgraph.typing import ContextT
 from agent.custom_llm import deepseek_chat_model
 from agent.utils.log_util import log
 from agent.utils.tools import load_skill
+from agent.utils import python_tools
 
 def get_tools_by_skill(skill_name: str, all_tools: dict[str, list[BaseTool]]) -> list[BaseTool]:
     """根据技能名称获取对应的工具列表"""
     skill_tool_mapping = {
+        "python_execution": all_tools.get("python_execution", []),
         "basic_skill": all_tools.get("basic", []), # 每个技能对应的工具列表
     }
     return skill_tool_mapping.get(skill_name)
@@ -287,6 +289,7 @@ async def create_skills_based_agent():
     categorized_tools: dict[str, list[BaseTool]] = {
         "gaode": gaode_tools,
         "12306": railway_tools,
+        "python_execution": [python_tools.execute_python, python_tools.run_script],
     }
 
     graph = create_agent(
@@ -308,6 +311,7 @@ async def create_skills_based_agent():
             - 高德导航 (gaode_navigation): 地图导航、路径规划
             - 铁路查询 (railway_booking): 火车票查询、预订
             - 数据分析 (data_analysis): 数据统计、分析报告
+            - Python脚本 (python_execution): 执行Python代码和脚本
             
             请先加载技能，再使用相应工具！
         """

@@ -11,10 +11,12 @@ requires-python = ">=3.10"
 dependencies = [
     "langchain>=1.2.10",
     "langchain-deepseek>=1.0.1",
+    "langchain-experimental>=0.0.65",
     "langchain-mcp-adapters>=0.2.1",
     "langgraph>=1.0.0",
     "loguru>=0.7.3",
     "python-dotenv>=1.0.1",
+    "pyyaml>=6.0",
 ]
 
 

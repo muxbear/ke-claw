@@ -5,7 +5,7 @@ from langchain_core.messages import ToolMessage
 from langchain_core.tools import tool, InjectedToolCallId
 from langgraph.types import Command
 
-from agent.skills_list import SKILLS
+from agent.skills_loader import SKILLS
 from agent.utils.log_util import log
 
 
