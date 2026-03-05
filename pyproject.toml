@@ -9,6 +9,7 @@ readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.10"
 dependencies = [
+    "bs4>=0.0.2",
     "langchain>=1.2.10",
     "langchain-deepseek>=1.0.1",
     "langchain-experimental>=0.0.65",

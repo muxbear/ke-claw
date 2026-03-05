@@ -12,13 +12,15 @@ from langgraph.typing import ContextT
 from agent.custom_llm import deepseek_chat_model
 from agent.utils.log_util import log
 from agent.utils.tools import load_skill
-from agent.utils import python_tools
+from agent.utils import python_tools, web_search_tools
 
 def get_tools_by_skill(skill_name: str, all_tools: dict[str, list[BaseTool]]) -> list[BaseTool]:
     """根据技能名称获取对应的工具列表"""
     skill_tool_mapping = {
         "python_execution": all_tools.get("python_execution", []),
+        "web_search": all_tools.get("web_search", []),
         "basic_skill": all_tools.get("basic", []), # 每个技能对应的工具列表
+        "weather_query": all_tools.get("gaode", []), # 天气查询使用高德的工具
     }
     return skill_tool_mapping.get(skill_name)
 
@@ -308,6 +310,7 @@ async def create_skills_based_agent():
             5. 提供专业、准确的回答
             
             可用技能领域：
+            - 天气查询 (weather_query): 实时天气、天气预报、空气质量
             - 高德导航 (gaode_navigation): 地图导航、路径规划
             - 铁路查询 (railway_booking): 火车票查询、预订
             - 数据分析 (data_analysis): 数据统计、分析报告
